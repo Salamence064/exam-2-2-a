@@ -30,17 +30,17 @@ def generate_keys(public_fname="public.pem", private_fname="private.pem"):
     key = RSA.generate(2048)
 
     # ======= public key =======
-    with open(public_fname, "b") as out:
+    with open(public_fname, "wb") as out:
         publicKey = key.publickey()
         out.write(publicKey.export_key())
 
     # ======= private key =======
-    with open(private_fname, "b") as out:
+    with open(private_fname, "wb") as out:
         out.write(key.export_key())
 
 # Encrypt a message using a public key
 def encrypt_message(message, pub_key_path, out_fname="encrypted.txt"):
-    with open(out_fname, "b") as out:
+    with open(out_fname, "wb") as out:
         publicKey = RSA.import_key(open(pub_key_path).read())
         cipher = PKCS1_OAEP.new(publicKey)
         encryptedMessage = cipher.encrypt(message)
@@ -48,7 +48,7 @@ def encrypt_message(message, pub_key_path, out_fname="encrypted.txt"):
 
 # Decrypt a message using a private key
 def decrypt_message(message, priv_key_path, out_fname="decrypted.txt"):
-    with open(out_fname, "b") as out:
+    with open(out_fname, "wb") as out:
         # decrypt the message with the private RSA key using PKCS1_OAEP
         # and return True if the decryption is successful
         try:
@@ -80,7 +80,7 @@ def sign_message(message, priv_key_path, out_fname="signed_msg.txt"):
 
     # TODO: close the file
 
-    with open(out_fname, "b") as out:
+    with open(out_fname, "wb") as out:
         privateKey = RSA.import_key(open(priv_key_path).read())
         hash = SHA256.new(message)
         signature = pkcs1_15.new(privateKey).sign(hash)
