@@ -173,6 +173,7 @@ if __name__ == "__main__":
             signature = open("rev.txt", "rb").read()
             key = find_sign_key(message, signature)
             verify_message(message, signature, key)
+            print(f"Reveille Key: {key}")
             
         elif option == "q":
             break
