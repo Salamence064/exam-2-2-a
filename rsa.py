@@ -144,6 +144,7 @@ if __name__ == "__main__":
             message = open("sus.txt", "rb").read()
             key_path = find_decrypt_key(message)
             decrypt_message(message, key_path, "sus_decrypted.txt")
+            print(f"Key Path: {key_path}")
 
         elif option == "c":
             # part c.1: sign a message using the private key from part a.1
